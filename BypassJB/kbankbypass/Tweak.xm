@@ -12,7 +12,7 @@ int (*orig_100890A4C)(void);
 
 int sub_100890A4C(void)
 {
-    return 9013;
+    return 0x2335;
 }
 
 %ctor
