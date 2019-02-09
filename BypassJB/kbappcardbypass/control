@@ -1,7 +1,7 @@
 Package: com.xsf1re.kbappcardbypass
 Name: KBAppCardBypass
 Depends: mobilesubstrate
-Version: 1.0
+Version: 1.0.1
 Architecture: iphoneos-arm
 Description: An awesome MobileSubstrate tweak!
 Maintainer: XsF1re

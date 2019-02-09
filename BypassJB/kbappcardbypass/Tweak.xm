@@ -1,19 +1,12 @@
 #include <sys/stat.h>
 #import <mach-o/dyld.h>
 
+
 %hook SFAntiPiracy 
-+(int)IIll {
-	return 6284382;
++(void)lllI {
+ ;
 }
 %end
-
-
-%hook AppJailBrokenChecker
-+(unsigned char) isAppJailbroken {
-	return 0;
-}
-%end
-
 
 %hook NSString 
 - (BOOL)writeToFile:(NSString *)path  {
@@ -113,7 +106,9 @@
 %end
 
 %hook amsLibrary
--(long long) a3142:(id)arg1 { return %orig - 10; }
+-(long long) a3142: (id) arg1 {
+  return %orig - 10;
+}
 %end
 
 static int (*orig_stat)(const char * file_name, struct stat *buf);
@@ -140,11 +135,22 @@ int new_lstat(const char *path, struct stat *buf) {
     return orig_lstat(path, buf);
 }
 
-
+MSHook(const char*, _dyld_get_image_name, uint32_t image_index)
+{
+    
+    const char* dyld= __dyld_get_image_name(image_index);
+    if(strstr(dyld, "MobileSubstrate"))
+    {
+        return "";
+    }else{
+        return dyld;
+    }
+}
 
 %ctor 
 	{
 		%init;
+		MSHookFunction(_dyld_get_image_name, MSHake(_dyld_get_image_name));
 		MSHookFunction((void *)fopen, (void *)new_fopen, (void **)&orig_fopen);
 		MSHookFunction((void *)stat, (void *)new_stat, (void **)&orig_stat);
 		MSHookFunction((void *)lstat, (void *)new_lstat, (void **)&orig_lstat);
