@@ -1,5 +1,5 @@
 %hook ams2Library
--(long long) a3142:(id)arg1 { return %orig - 10; }
+-(long long) fairPlay:(id)arg1 { return %orig - 144; }
 %end
 
 %hook BTWCGXMLParser
