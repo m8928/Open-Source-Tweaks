@@ -1,6 +1,12 @@
 #import <substrate.h>
 #import <mach-o/dyld.h>
 
+%hook SFAntiPiracy 
++(int)isPirated{
+	return 6284382;
+}
+%end
+
 %hook NSFileManager
 - (BOOL)fileExistsAtPath:(NSString *)path {
 		if([path isEqualToString:@"/Applications/Cydia.app"]) {
@@ -63,9 +69,9 @@
 }
 %end
 
-int (*orig_100137514)(void);
+int (*orig_100134F68)(void);
 
-int sub_100137514(void)
+int sub_100134F68(void)
 {
     return 4783242;
 }
@@ -74,8 +80,8 @@ int sub_100137514(void)
 {
     @autoreleasepool
     {
-        unsigned long test1 = _dyld_get_image_vmaddr_slide(0) + 0x100137514;
-        MSHookFunction((void *)test1, (void *)sub_100137514, (void **)&orig_100137514);
+        unsigned long test1 = _dyld_get_image_vmaddr_slide(0) + 0x100134F68;
+        MSHookFunction((void *)test1, (void *)sub_100134F68, (void **)&orig_100134F68);
 		
     }
 }
