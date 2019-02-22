@@ -1,5 +1,9 @@
 /* Framework Found: DTTJailbreakDetection */
 /* bool __cdecl +[DTTJailbreakDetection isJailbroken](DTTJailbreakDetection_meta *self, SEL a2) */
+/* void __cdecl -[IgaworksCoreLib makeCrashParameter:](IgaworksCoreLib *self, SEL a2, id a3) */
+/* bool __cdecl -[ANSMetadata computeIsJailbroken](ANSMetadata *self, SEL a2) */
+/* bool __cdecl -[GADODevice jailbroken](GADODevice *self, SEL a2) */
+
 #import <substrate.h>
 
 %hook UIApplication 
@@ -47,6 +51,8 @@
 				} else if([path isEqualToString:@"/etc/apt"]) {
 					return NO;
 				} else if([path isEqualToString:@"/usr/bin/ssh"]) {
+					return NO;
+				} else if([path isEqualToString:@"/bin/sh"]) {
 					return NO;
 				} else {
 					return %orig;
